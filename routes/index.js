@@ -14,4 +14,6 @@ router.post(
   userController.profile
 );
 
+router.post("/getProfile", userController.getProfile);
+
 module.exports = router;

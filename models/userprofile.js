@@ -2,7 +2,7 @@ const con = require("../dbconf");
 
 exports.getUser = (req, callback) => {
   return new Promise(function (resolve, reject) {
-    let query = "SELECT id FROM userprofile WHERE email=? LIMIT 1";
+    let query = "SELECT * FROM userprofile WHERE email=? LIMIT 1";
     con.query(query, req.body.email, (err, result) => {
       if (err) {
         callback(err, null);

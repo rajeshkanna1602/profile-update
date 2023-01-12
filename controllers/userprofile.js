@@ -9,8 +9,7 @@ exports.profile = async (req, res) => {
   const callback = (err, data) => {
     if (err)
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial.",
+        message: err.message || "Something went Wrong!",
       });
     else {
       return Promise.resolve(data);
@@ -39,4 +38,39 @@ exports.profile = async (req, res) => {
   } catch (err) {
     console.log("err on await", err);
   }
+};
+
+exports.getProfile = async (req, res) => {
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+  const callback = (err, data) => {
+    if (err)
+      res.status(500).send({
+        message: err.message || "Something went wrong!",
+      });
+    else {
+      return Promise.resolve(data);
+    }
+  };
+
+  const gerUserResult = await userModels.getUser(req, callback);
+
+  if (gerUserResult && gerUserResult.length > 0) {
+    res.send({
+      status: true,
+      // message: "",
+      data: gerUserResult,
+    });
+  } else {
+    res.send({
+      status: true,
+      message: "No user Data",
+      // data: gerUserResult,
+    });
+  }
+
+  console.log("getUser Result", gerUserResult);
 };

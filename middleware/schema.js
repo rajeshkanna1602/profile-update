@@ -12,7 +12,6 @@ const schemas = {
       .min(10 ** 9)
       .max(10 ** 10 - 1),
     workPhone: Joi.number(),
-    year: Joi.number(),
     location: Joi.string().required(),
   }),
 };
